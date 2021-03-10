@@ -1,0 +1,1 @@
+export const SET_COMMENTS_INTO_STATE = 'pandaTestTask/commentsTable/SET_COMMENTS_INTO_STATE';
