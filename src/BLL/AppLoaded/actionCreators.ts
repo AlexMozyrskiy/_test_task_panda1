@@ -4,9 +4,9 @@ import {
 import {
     SetIsAppLoadedActionCreatorTSType
 } from "./typeScriprtTypes";
-import { isAppLoadedTSType } from "../commonTSTypes";
+import { IsAppLoadedTSType } from "../commonTSTypes";
 
-export const setIsAppLoadedIntoStateActionCreator = (isAppLoaded: isAppLoadedTSType): SetIsAppLoadedActionCreatorTSType => {
+export const setIsAppLoadedIntoStateActionCreator = (isAppLoaded: IsAppLoadedTSType): SetIsAppLoadedActionCreatorTSType => {
     return {
         type: IS_APP_LOADDED,
         isAppLoaded

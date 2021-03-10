@@ -5,7 +5,7 @@ import {
     SetCommentsIntoStateActionCreatorTSType,
     SetCurrentPageIntoStateActionCreatorTSType
 } from "./typeScriprtTypes";
-import { CommentTSType, currentPageTSType } from "../commonTSTypes";
+import { CommentTSType, CurrentPageTSType } from "../commonTSTypes";
 
 export const setCommentsIntoStateActionCreator = (comments: Array<CommentTSType>): SetCommentsIntoStateActionCreatorTSType => {
     return {
@@ -14,7 +14,7 @@ export const setCommentsIntoStateActionCreator = (comments: Array<CommentTSType>
     }
 };
 
-export const setCurrentPageIntoStateActionCreator = (currentPage: currentPageTSType): SetCurrentPageIntoStateActionCreatorTSType => {
+export const setCurrentPageIntoStateActionCreator = (currentPage: CurrentPageTSType): SetCurrentPageIntoStateActionCreatorTSType => {
     return {
         type: SET_CURRENT_PAGE_INTO_STATE,
         currentPage: currentPage

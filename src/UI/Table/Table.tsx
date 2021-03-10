@@ -37,7 +37,7 @@ const Table: React.FC<PropsTSType> = (props) => {
                     </tr>
                     {
                         props.comments.map(item => {
-                            return <tr>
+                            return <tr key={item.id}>
                                 <td>{item.postId}</td>
                                 <td>{item.id}</td>
                                 <td>{item.name}</td>

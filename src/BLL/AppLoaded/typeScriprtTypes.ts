@@ -4,21 +4,21 @@ import {
 
 import { RootStateTSType } from "../redux/redux";
 import {
-    isAppLoadedTSType
+    IsAppLoadedTSType
 } from "../commonTSTypes";
 
 
 // ---------------------- action creators types -------------------------------------------------------
 export type SetIsAppLoadedActionCreatorTSType = {
     type: typeof IS_APP_LOADDED
-    isAppLoaded: isAppLoadedTSType
+    isAppLoaded: IsAppLoadedTSType
 };
 // ---------------------- / action creators types -----------------------------------------------------
 
 
 // -------------------------------------- reducer type -------------------------------------
 export type InitialStateTSType = {
-    isAppLoaded: isAppLoadedTSType
+    isAppLoaded: IsAppLoadedTSType
 };
 
 export type PropActionRedecerTSType = SetIsAppLoadedActionCreatorTSType  // тут, при увеличении количесвта экшион креаторов знаком | будем их добавлять чтобы типищировать дальше в редюсере входящий action
@@ -26,7 +26,7 @@ export type PropActionRedecerTSType = SetIsAppLoadedActionCreatorTSType  // ту
 
 
 // ------------------------------------ Selectors Types -------------------------------------
-export type GetIsAppLoadedSelectorTSType = (state: RootStateTSType) => isAppLoadedTSType
+export type GetIsAppLoadedSelectorTSType = (state: RootStateTSType) => IsAppLoadedTSType
 // ------------------------------------ / Selectors Types -----------------------------------
 
 
