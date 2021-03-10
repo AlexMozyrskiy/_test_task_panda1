@@ -1,3 +1,4 @@
+// --------------------- Типы объекта одного комментария ------------------------
 type BodyTSType = string | null
 type EmailTSType = string | null
 type NameTSType = string | null
@@ -11,3 +12,8 @@ export type CommentTSType = {           // типы в одном объекте
     name: NameTSType
     postId: PostIdTSType
 }
+// --------------------- / Типы объекта одного комментария ----------------------
+
+// --------------------- Типы редюсеры ------------------------------------------
+export type currentPageTSType = number
+// --------------------- / Типы редюсеры ----------------------------------------

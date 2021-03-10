@@ -46,13 +46,6 @@ const Table: React.FC<PropsTSType> = (props) => {
                             </tr>
                         })
                     }
-                    <tr>
-                        <td>34,5</td>
-                        <td>3,5</td>
-                        <td>36</td>
-                        <td>23</td>
-                        <td>23</td>
-                    </tr>
                 </tbody>
             </table>
         </div>
