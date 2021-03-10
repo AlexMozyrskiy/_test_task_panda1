@@ -11,16 +11,17 @@ import { getCommentsSelector, getCurrentPageSelector, getItemsPerPageSelector } 
 import { getIsAppLoadedSelector } from "../../BLL/AppLoaded/selectors";
 import AppPreloader from "../Preloader/Preloader";
 import getCurrentPageComments from "../../helpers/getCurrentPageComments";
+import getPaginationSquaresArrayNumbers from "../../helpers/getPaginationSquaresArrayNumbers";
 
 
 const TableContainer: React.FC<PropsTSType> = (props) => {
     useEffect(() => {
         props.commentsThunkCreator();
     }, [props.currentPage]);
+    
+    const currentPageComments = getCurrentPageComments(props.comments, props.currentPage, props.itemsPerPage)   // фильтруем все комменты и получаем комменты согласно текущей страницы
 
-    const currentPageComments = getCurrentPageComments(props.comments, props.currentPage, props.itemsPerPage)
-
-    if(props.isAppLoaded) {
+    if(props.isAppLoaded) {                             // если ответ от сервера еще не получен покажем прелоадер
         return <Table comments={currentPageComments} />
     } else {
         return <AppPreloader />
