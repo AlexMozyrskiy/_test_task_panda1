@@ -1,0 +1,1 @@
+export const IS_APP_LOADDED = 'pandaTestTask/AppLoaded/IS_APP_LOADDED';

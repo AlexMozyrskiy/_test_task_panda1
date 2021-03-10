@@ -11,9 +11,9 @@ import { getCommentsSelector } from "../../BLL/CommentsTable/selectors";
 
 
 const TableContainer: React.FC<PropsTSType> = (props) => {
-    useEffect( () => {
+    useEffect(() => {
         props.commentsThunkCreator();
-      }, [] );
+    }, []);
 
     return <Table comments={props.comments} />
 }

@@ -2,10 +2,12 @@ import {createStore, combineReducers, applyMiddleware} from "redux";
 import thunkMiddleWare from "redux-thunk";
 import { compose } from "redux";
 import commentsTableReducer from "../CommentsTable/reducer";
+import isAppLoadedReducer from "../AppLoaded/reducer";
 
 
 let rootReducer = combineReducers({
-  commentsTable: commentsTableReducer
+  commentsTable: commentsTableReducer,
+  isAppLoaded: isAppLoadedReducer
 });
 
 type RootReducerTSType = typeof rootReducer;                        // тут будет (state: GlobslState) => GlobalState, typeof после отработки опрелдеит такой тип: (state: GlobslState) => GlobalState для функции rootStore

@@ -16,4 +16,5 @@ export type CommentTSType = {           // типы в одном объекте
 
 // --------------------- Типы редюсеры ------------------------------------------
 export type currentPageTSType = number
+export type isAppLoadedTSType = boolean
 // --------------------- / Типы редюсеры ----------------------------------------
