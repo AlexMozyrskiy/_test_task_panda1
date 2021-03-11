@@ -20,27 +20,32 @@ const TableContainer: React.FC<PropsTSType> = (props) => {
         props.commentsThunkCreator();
     }, [props.currentPage]);
 
-    let [firstPaginationSquareNumber, setFirstPaginationSquareNumber] = useState(1);
-    let [lastPaginationSquareNumber, setLastPaginationSquareNumber] = useState(5);
+    let [firstPaginationSquareNumber, setFirstPaginationSquareNumber] = useState(1);                            // цифра в первом квадратике пагинации
+    let [lastPaginationSquareNumber, setLastPaginationSquareNumber] = useState(5);                              // цифра в последнем квадратике пагинации
 
     const totalCountPaginationSquares: number = Math.ceil(props.comments.length / props.itemsPerPage);          // общее количество возможных отображаемых квадратиков
 
-    const currentPageComments = getCurrentPageComments(props.comments, props.currentPage, props.itemsPerPage)   // фильтруем все комменты и получаем комменты согласно текущей страницы
+    const currentPageComments = getCurrentPageComments(props.comments, props.currentPage, props.itemsPerPage)   // фильтруем все комменты и получаем комменты согласно текущей страницы и количеству комментов на странице
 
-    const paginationSquareNumbers = getPaginationSquaresArrayNumbers(                                           // Получим массив из цифр для его мапа в квадратиках пагинации
+    // ------------------------ Получим массив из цифр для его мапа в квадратиках пагинации -----------------------------------
+    const paginationSquareNumbers = getPaginationSquaresArrayNumbers(
         props.comments.length,
         props.itemsPerPage,
         5,
         props.currentPage,
         firstPaginationSquareNumber,
         lastPaginationSquareNumber);
+    // ------------------------ / Получим массив из цифр для его мапа в квадратиках пагинации ---------------------------------
 
 
-    const onPaginationSquareClick: OnPaginationSquareClickTSType = (clickedPage) => {                           // функция при клике на пагинациооный квадратик
+    // ----------------------------------- Функция при клике на пагинациооный квадратик ----------------------------------------
+    const onPaginationSquareClick: OnPaginationSquareClickTSType = (clickedPage) => {
         props.setCurrentPageIntoStateActionCreator(clickedPage);
         setFirstPaginationSquareNumber(paginationSquareNumbers[0]);
         setLastPaginationSquareNumber(paginationSquareNumbers[(paginationSquareNumbers.length - 1)]);
     }
+    // ----------------------------------- / Функция при клике на пагинациооный квадратик --------------------------------------
+
 
     if (props.isAppLoaded) {                             // если ответ от сервера еще не получен покажем прелоадер
         return <Table
