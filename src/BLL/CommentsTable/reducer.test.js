@@ -1,4 +1,4 @@
-import { setCommentsIntoStateActionCreator } from "./actionCreators";
+import { setCommentsIntoStateActionCreator, setCurrentPageIntoStateActionCreator } from "./actionCreators";
 import commentsTableReducer from "./reducer";
 
 
@@ -11,7 +11,9 @@ let initialState = {
             name: null,
             postId: null
         }
-    ]
+    ],
+    currentPage: 1,
+    itemsPerPage: 50
 };
 
 const responseFromSerrver = [
@@ -67,3 +69,18 @@ it("Тест при удачном ответе от сервера все св�
     expect(newState.comments[1].body).toBe(responseFromSerrver[1].body);
 });
 /* / Тест при удачном ответе от сервера все свойства в объектах ответа от сревера равны свойствам в стейте, запись в стейт прошла успешно */
+
+
+/* Тест при клике на пагинационный квадратик currentPage становится равным цифре в нажатом квадратике */
+it("Тест при клике на пагинационный квадратик currentPage становится равным цифре в нажатом квадратике", () => {
+    const newCurrentPage = 5;
+    // 1. test data
+    let action = setCurrentPageIntoStateActionCreator(newCurrentPage);
+
+    // 2. action
+    let newState = commentsTableReducer(initialState, action);
+
+    // 3. expectation
+    expect(newState.currentPage).toBe(newCurrentPage);
+});
+/* / Тест при клике на пагинационный квадратик currentPage становится равным цифре в нажатом квадратике */

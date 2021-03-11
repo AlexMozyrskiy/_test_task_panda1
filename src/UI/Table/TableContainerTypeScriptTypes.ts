@@ -14,6 +14,7 @@ export type MapStateToPropsTSType = {      // пропсы с данными и�
 // ----------------------------------------------- Props Types --------------------------------------
 export type MapDispatchToPropsTSType = {   // пропсы с функциями из контекста
     commentsThunkCreator: () => void
+    setCurrentPageIntoStateActionCreator: (currentPage: CurrentPageTSType) => void
 }
 
 export type OwnPropsTSType = {             // все остальные пропсы в том числе переданные серез родительский компонент и написанные в этом компоненте
@@ -22,3 +23,7 @@ export type OwnPropsTSType = {             // все остальные проп
 
 export type PropsTSType = MapStateToPropsTSType & MapDispatchToPropsTSType & OwnPropsTSType
 // ----------------------------------------------- / Props Types ------------------------------------
+
+// ----------------------------- Функция при клике по пагинационному квадратику -----------------------------
+export type OnPaginationSquareClickTSType = (pageNumber: CurrentPageTSType) => void
+// ----------------------------- / Функция при клике по пагинационному квадратику ---------------------------
