@@ -1,5 +1,6 @@
 import React from "react";
 import { PropsTSType } from "./TableTypeScriptTypes"
+import { sortByEnum } from "./TableContainerTypeScriptTypes";
 
 
 declare module "react" {
@@ -59,14 +60,24 @@ const Table: React.FC<PropsTSType> = (props) => {
 
 
             <table className="table" border="1">
-                <caption>Fake comments</caption>
+                <caption>Fake comments. Кликните по заголовку колонки, чтобы отсортировать</caption>
                 <tbody>
                     <tr>
-                        <th>Post Id &#9650;</th>
-                        <th>Comment Id &#9660;</th>
-                        <th>Name &#9650;</th>
-                        <th>Email &#9660;</th>
-                        <th>Comment &#9660;</th>
+                        <th onClick={() => props.onTableHeaderFieldСlick('postId')}>Post Id
+                            {props.sortByField === "postId" ? props.getSortingArrowView(props.commentsSorted) : null}   { /* получим вид стрелки сортировки при клике на заголовок столбца */}
+                        </th>
+                        <th onClick={() => props.onTableHeaderFieldСlick('id')}>Comment Id
+                            {props.sortByField === "id" ? props.getSortingArrowView(props.commentsSorted) : null}
+                        </th>
+                        <th onClick={() => props.onTableHeaderFieldСlick('name')}>Name
+                            {props.sortByField === "name" ? props.getSortingArrowView(props.commentsSorted) : null}
+                        </th>
+                        <th onClick={() => props.onTableHeaderFieldСlick('email')}>Email
+                            {props.sortByField === "email" ? props.getSortingArrowView(props.commentsSorted) : null}
+                        </th>
+                        <th onClick={() => props.onTableHeaderFieldСlick('body')}>Comment
+                            {props.sortByField === "body" ? props.getSortingArrowView(props.commentsSorted) : null}
+                        </th>
                     </tr>
                     {
                         props.currentPageComments.map(item => {

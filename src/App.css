@@ -897,3 +897,7 @@ body {
 	animation-timing-function: ease-in;
   }
 /* / Анимация ошибки */
+
+.test {
+	display: inline-block;
+}

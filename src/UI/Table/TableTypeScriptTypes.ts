@@ -1,5 +1,5 @@
 import { CommentTSType, CurrentPageTSType } from "../../BLL/commonTSTypes";
-import { OnPaginationSquareClickTSType } from "./TableContainerTypeScriptTypes"
+import { OnPaginationSquareClickTSType, OnTableHeaderFieldСlickTSType, SortingArrowViewTSType } from "./TableContainerTypeScriptTypes"
 
 export type MapStateToPropsTSType = {      // пропсы с данными из контекста
 
@@ -16,6 +16,10 @@ export type OwnPropsTSType = {             // все остальные проп
     currentPage: CurrentPageTSType
     totalCountPaginationSquares: number
     onPaginationSquareClick: OnPaginationSquareClickTSType
+    onTableHeaderFieldСlick: OnTableHeaderFieldСlickTSType
+    getSortingArrowView: SortingArrowViewTSType
+    sortByField: string
+    commentsSorted: number
 }
 
 export type PropsTSType = MapStateToPropsTSType & MapDispatchToPropsTSType & OwnPropsTSType

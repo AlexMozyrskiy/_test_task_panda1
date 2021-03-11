@@ -18,7 +18,7 @@ export type MapDispatchToPropsTSType = {   // пропсы с функциями
 }
 
 export type OwnPropsTSType = {             // все остальные пропсы в том числе переданные серез родительский компонент и написанные в этом компоненте
-    
+
 }
 
 export type PropsTSType = MapStateToPropsTSType & MapDispatchToPropsTSType & OwnPropsTSType
@@ -27,3 +27,20 @@ export type PropsTSType = MapStateToPropsTSType & MapDispatchToPropsTSType & Own
 // ----------------------------- Функция при клике по пагинационному квадратику -----------------------------
 export type OnPaginationSquareClickTSType = (pageNumber: CurrentPageTSType) => void
 // ----------------------------- / Функция при клике по пагинационному квадратику ---------------------------
+
+// -------------------------- Функция при клике на заголовок поля таблицы, произведем сортировку ---------------------------
+export type OnTableHeaderFieldСlickTSType = (fieldName: string) => void
+// -------------------------- / Функция при клике на заголовок поля таблицы, произведем сортировку -------------------------
+
+// ---------------- Функция определяет по состоянию сортировки какую стрелку возвращать вниз или вверх ---------------------
+export type SortingArrowViewTSType = (sortAscending: sortByEnum) => JSX.Element | null | undefined
+// ---------------- / Функция определяет по состоянию сортировки какую стрелку возвращать вниз или вверх -------------------
+
+
+// ---------------------------- Enum для сортировки массива -------------------------------------------------
+export enum sortByEnum {
+    notSorted = 0,              // не отсортирован
+    ascending = 1,              // по возрастанию
+    descending = 2              // по убыванию
+}
+// ---------------------------- / Enum для сортировки массива -----------------------------------------------

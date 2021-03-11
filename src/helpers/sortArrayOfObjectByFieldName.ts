@@ -4,7 +4,7 @@ import { CommentTSType } from "../BLL/commonTSTypes"
 type sortArrayOfObjectByFieldTSType = (arrayOfObjects: Array<CommentTSType>, sortByField: string, isSortAscending: boolean) => Array<CommentTSType>
 
 
-const sortArrayOfObjectByFieldName: sortArrayOfObjectByFieldTSType = (arrayOfObjects, sortByField, isSortAscending) => {
+const sortArrayOfObjectByFieldName: sortArrayOfObjectByFieldTSType = (arrayOfObjects, sortByField, isSortAscending) => {    // arrayOfObjects - массив объектов; sortByField - имя поля (string) по которому будем соритровать; isSortAscending - сортировать по возрастанию? (boolean)
 
     function byFieldAscending(field: string) {
         return (a: any, b: any) => a[field] > b[field] ? 1 : -1;
