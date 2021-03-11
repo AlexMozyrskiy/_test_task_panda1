@@ -16,9 +16,12 @@ const Table: React.FC<PropsTSType> = (props) => {
 
             <div className="users__pagination-wrapper">
                 <span className="users__pagination-single-span">&larr;</span>
-                <span className="users__pagination-single-span">...</span>
-                <span className="users__pagination-single-span">1</span>
-                <span className="users__pagination-single-span">2</span>
+                {/* <span className="users__pagination-single-span">...</span> */}
+                {
+                    props.paginationSquareNumbers.map( item => <span key={item} className={`users__pagination-single-span ${item === props.currentPage ? "users__pagination-single-span_active" : null}`}>{item}</span> )
+                }
+                {/* <span className="users__pagination-single-span">1</span> */}
+                {/* <span className="users__pagination-single-span">2</span> */}
                 <span className="users__pagination-single-span">&rarr;</span>
             </div>
 

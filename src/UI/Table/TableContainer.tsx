@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Table from "./Table";
 import {
     MapStateToPropsTSType, PropsTSType,
@@ -18,11 +18,20 @@ const TableContainer: React.FC<PropsTSType> = (props) => {
     useEffect(() => {
         props.commentsThunkCreator();
     }, [props.currentPage]);
-    
+
+    let [firstPaginationSquareNumber, setFirstPaginationSquareNumber] = useState(1);
+    let [lastPaginationSquareNumber, setLastPaginationSquareNumber] = useState(3);
+
     const currentPageComments = getCurrentPageComments(props.comments, props.currentPage, props.itemsPerPage)   // фильтруем все комменты и получаем комменты согласно текущей страницы
 
-    if(props.isAppLoaded) {                             // если ответ от сервера еще не получен покажем прелоадер
-        return <Table comments={currentPageComments} />
+    const paginationSquareNumbers = getPaginationSquaresArrayNumbers(props.comments.length, props.itemsPerPage, 3, props.currentPage, firstPaginationSquareNumber, lastPaginationSquareNumber);
+
+    if (props.isAppLoaded) {                             // если ответ от сервера еще не получен покажем прелоадер
+        return <Table
+            comments={currentPageComments}
+            paginationSquareNumbers={paginationSquareNumbers}
+            currentPage={props.currentPage}
+        />
     } else {
         return <AppPreloader />
     }
