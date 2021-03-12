@@ -4,7 +4,8 @@ import {
     MapStateToPropsTSType, PropsTSType,
     MapDispatchToPropsTSType, OwnPropsTSType,
     OnPaginationSquareClickTSType, sortByEnum,
-    OnTableHeaderFieldСlickTSType, SortingArrowViewTSType
+    OnTableHeaderFieldСlickTSType, SortingArrowViewTSType,
+    onSearchFieldChangeTSType
 } from "./TableContainerTypeScriptTypes";
 import { RootStateTSType } from "../../BLL/redux/redux";
 import { commentsThunkCreator } from "../../BLL/CommentsTable/thunkCreators";
@@ -15,6 +16,7 @@ import AppPreloader from "../Preloader/Preloader";
 import getCurrentPageComments from "../../helpers/getCurrentPageComments";
 import getPaginationSquaresArrayNumbers from "../../helpers/getPaginationSquaresArrayNumbers";
 import sortArrayOfObjectByFieldName from "../../helpers/sortArrayOfObjectByFieldName";
+import uniqueItemsInArr from "../../helpers/uniqueItemsInArr";
 import { setCurrentPageIntoStateActionCreator } from "../../BLL/CommentsTable/actionCreators";
 
 
@@ -26,7 +28,10 @@ const TableContainer: React.FC<PropsTSType> = (props) => {
     let [firstPaginationSquareNumber, setFirstPaginationSquareNumber] = useState(1);                            // цифра в первом квадратике пагинации
     let [lastPaginationSquareNumber, setLastPaginationSquareNumber] = useState(5);                              // цифра в последнем квадратике пагинации
     let [commentsSorted, setCommentsSorted] = useState(sortByEnum.notSorted);                                   // если 0 - не отсортирован, 1 - сортирован по возрастанию, 2 - по убыванию
-    let [sortByField, setSortByField] = useState<string>("");                                                     // название поля по которому бужем сортировать
+    let [sortByField, setSortByField] = useState<string>("");                                                   // название поля по которому бужем сортировать
+    let [searchFieldValue, SetsearchFieldValue] = useState<number | string>("");                                  // значение вводимое в поле поиска для фильтрации
+    let [arraySearchedIndexes, setArraySearchedIndexes] = useState<Array<number>>([]);                                  // значение вводимое в поле поиска для фильтрации
+
 
 
 
@@ -42,6 +47,15 @@ const TableContainer: React.FC<PropsTSType> = (props) => {
                                                     ? sortArrayOfObjectByFieldName(currentPageComments, sortByField, true)  // если требуется сортировка по возрастанию
                                                     : sortArrayOfObjectByFieldName(currentPageComments, sortByField, false) // если требуется сортировка по убыванию
     // ---------------------------- / Проверим нужно ли сортировать комментарии -----------------------------------------------
+
+
+    // ------------------------------ Проверим ищет ли пользователь что-ир и если ищет изменим массив для мапа в FC ----------------
+    if(arraySearchedIndexes.length != 0) {
+        currentPageComments = currentPageComments.filter((item, index) => {
+            return arraySearchedIndexes.includes(index);
+        });
+    }
+    // ------------------------------ / Проверим ищет ли пользователь что-ир и если ищет изменим массив для мапа в FC --------------
 
 
 
@@ -89,6 +103,36 @@ const TableContainer: React.FC<PropsTSType> = (props) => {
     // ---------------- / Функция определяет по состоянию сортировки какую стрелку возвращать вниз или вверх -------------------
 
 
+    // ----------------------------- Функция при изменении в поле ввода поиска -----------------------------
+    const onSearchFieldChange: onSearchFieldChangeTSType = (value) => {
+        SetsearchFieldValue(value);                                     // запишем новое значение из поля ввода поиска для его отображения в поле ввода (флакс)
+
+        let arraySearchedIndexesInF: Array<number> = [];                // в этот массив будем пушить индексы массива в сврйствах которых нашли совпадающие с напечатанным в поле воода
+        currentPageComments.forEach( (item, i) => {
+            let splitedName = item.name?.split(" ");                    // сплитаем строки с раздеителем пробел для поиска по словам
+            let splitedEmail = item.email?.split(" ");
+            let splitedBody = item.body?.split(" ");
+
+            splitedName?.forEach( el => {                               // для каждого сплитнутого элемента если === сравниваемое значение пушим индекс в массиве в массив индексов совпавших элементов
+                if(value === el) arraySearchedIndexesInF.push(i);
+            } );
+            splitedEmail?.forEach( el => {
+                if(value === el) arraySearchedIndexesInF.push(i);
+            } );
+            splitedBody?.forEach( el => {
+                if(value === el) arraySearchedIndexesInF.push(i);
+            } );
+            if(item.id === +value) arraySearchedIndexesInF.push(i);      // номер не сплитнешь сравниваем целмком
+            if(item.postId === +value) arraySearchedIndexesInF.push(i);  // номер не сплитнешь сравниваем целмком
+        } );
+
+        arraySearchedIndexesInF = uniqueItemsInArr(arraySearchedIndexesInF);   // уникальные значения в массиве, чтобы нее было повторений. Для правильного мапа, чтобы строчки не повторялись, т.к. может найти слово 2 раза в олной и той же строчке
+
+        setArraySearchedIndexes(arraySearchedIndexesInF);
+    }
+    // ----------------------------- / Функция при изменении в поле ввода поиска ---------------------------
+
+
 
     if (props.isAppLoaded) {                             // если ответ от сервера еще не получен покажем прелоадер
         return <Table
@@ -102,6 +146,8 @@ const TableContainer: React.FC<PropsTSType> = (props) => {
             getSortingArrowView={getSortingArrowView}
             sortByField={sortByField}
             commentsSorted={commentsSorted}
+            searchFieldValue={searchFieldValue}
+            onSearchFieldChange={onSearchFieldChange}
         />
     } else {
         return <AppPreloader />
@@ -120,7 +166,7 @@ const mapStateToProps = (state: RootStateTSType) => {
 
 const mapDispatchToProps = {
     commentsThunkCreator,
-    setCurrentPageIntoStateActionCreator
+    setCurrentPageIntoStateActionCreator,
 }
 
 export default connect<MapStateToPropsTSType, MapDispatchToPropsTSType, OwnPropsTSType, RootStateTSType>(mapStateToProps, mapDispatchToProps)(TableContainer);;

@@ -56,7 +56,12 @@ const Table: React.FC<PropsTSType> = (props) => {
                 }
             </div>
 
-            <div className="filter">Поиск</div><input className="filter__input" placeholder="Начните набирать чтобы искать" />
+            <div className="filter">Поиск</div><input
+                                                    value={props.searchFieldValue}
+                                                    className="filter__input"
+                                                    placeholder="Начните набирать чтобы искать"
+                                                    onChange={(e) => props.onSearchFieldChange(e.target.value)}  
+                                                />
 
 
             <table className="table" border="1">
