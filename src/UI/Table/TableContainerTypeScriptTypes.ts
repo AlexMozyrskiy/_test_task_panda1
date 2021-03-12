@@ -38,7 +38,7 @@ export type SortingArrowViewTSType = (sortAscending: sortByEnum) => JSX.Element 
 // ---------------- / Функция определяет по состоянию сортировки какую стрелку возвращать вниз или вверх -------------------
 
 // ----------------------------- Функция при изменении в поле ввода поиска -----------------------------
-export type onSearchFieldChangeTSType = (value: number | string) => void
+export type onSearchFieldChangeTSType = (value: string) => void
 // ----------------------------- / Функция при изменении в поле ввода поиска ---------------------------
 
 
