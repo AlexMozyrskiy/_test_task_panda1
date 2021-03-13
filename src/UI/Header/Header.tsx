@@ -12,7 +12,7 @@ const Header: React.FC = () => {
                 <nav className="header__nav">
                     <ul className="header__ul">
                         <li className="header__li">
-                            <NavLink to="/task" className="header__anchor">Task</NavLink>
+                            <NavLink to="/" className="header__anchor">Task</NavLink>
                         </li>
                         <li className="header__li">
                             <NavLink to="/comments" className="header__anchor">Comments To the Task</NavLink>

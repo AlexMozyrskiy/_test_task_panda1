@@ -16,7 +16,7 @@ const App: React.FC = () => {
     <Header />
 
     <Switch>
-      <Route path='/' render={() => <TableContainer />} />
+      <Route exact path='/' render={() => <TableContainer />} />
       <Route path='/comments' render={() => <TaskComments />} />
       <Route path='/cv' render={() => <CV />} />
       <Route path='*' render={() => <NotFound />} />
